@@ -1,0 +1,43 @@
+extends ../layout/index
+
+block contenido
+    div.py-10
+        h1.text-4xl.my-10.font-extrabold.text-center.text-red-500 Bienes 
+            span.font-normal.text-black Raices
+        h2.text-center.text-2xl.font-extrabold.text-sky-500= pagina
+
+        if errores
+            div(class='max-w-md mx-auto my-10')
+                each error in errores
+                    p.bg-red-600.text-white.uppercase.text-xs.text-center.p-2.mb-1.rounded-md.font-bold= error.msg
+
+        div.mt-8.mx-auto.max-w-md
+            div.bg-white.py-8.px-4.shadow
+                form.space-y-5(method='POST' action='/auth/registro' noValidate)
+                    input(type="hidden" name='_csrf' value=csrfToken)
+                    div 
+                        label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for='nombre') Tu nombre
+                        input#nombre.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder='Tu nombre' type='text' name='nombre' value=usuario ?usuario.nombre :'')
+                    div
+                        label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for='email') Email de registro
+                        input#email.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder='Tu email' type='email' name='email' value=usuario ? usuario.email : '')
+                    div
+                        label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for='email') Password
+                        input#password.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder='Tu password' type='password' name='password')
+                    div
+                        label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for='repetir_password') Repite tu password
+                        input#repetir_password.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder='Repite tu password' type='password' name='repetir_password')
+                    
+                    input(class='w-full bg-sky-300 hover:bg-sky-700 rounded-xl text-white font-bold py-2 cursor-pointer' type="submit" value='Crear cuenta')
+                    
+                    div.flex.items-center.justify-between
+                        a.text-gray-500.text-xs(href='/auth/login') ¿Ya tienes una cuenta? Inicia session
+                        a.text-gray-500.text-xs(href='/auth/olvide-password') Olvide mi password
+
+
+
+
+
+
+
+
